@@ -1,0 +1,79 @@
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:layout_marginBottom="20dp"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <TextView
+            android:id="@+id/questionNumber"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="1."
+            android:textColor="#400C5A"
+            android:textSize="16sp"/>
+
+        <TextView
+            android:id="@+id/question"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:text="You are in a group conversation, but someone interrupts you repeatedly. How do you react?"
+            android:textColor="#400C5A"
+            android:textSize="16sp"/>
+    </LinearLayout>
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/option1"
+        style="@style/Widget.Material3.Button.OutlinedButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="14sp"
+        android:textAlignment="textStart"
+        android:textColor="@color/text_color"
+        app:cornerRadius="15dp"
+        app:strokeColor="@color/card_border_color"
+        android:text="a.Stay calm and wait for your turn to speak.  "/>
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/option2"
+        style="@style/Widget.Material3.Button.OutlinedButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="14sp"
+        android:textAlignment="textStart"
+        android:textColor="@color/text_color"
+        app:cornerRadius="15dp"
+        app:strokeColor="@color/card_border_color"
+        android:text="b.Stay calm and wait for your turn to speak.  "/>
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/option3"
+        style="@style/Widget.Material3.Button.OutlinedButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="14sp"
+        android:textAlignment="textStart"
+        android:textColor="@color/text_color"
+        app:cornerRadius="15dp"
+        app:strokeColor="@color/card_border_color"
+        android:text="c.Stay calm and wait for your turn to speak.  "/>
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/option4"
+        style="@style/Widget.Material3.Button.OutlinedButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="14sp"
+        android:textAlignment="textStart"
+        android:textColor="@color/text_color"
+        app:cornerRadius="15dp"
+        app:strokeColor="@color/card_border_color"
+        android:text="d.Stay calm and wait for your turn to speak.  "/>
+
+</LinearLayout>

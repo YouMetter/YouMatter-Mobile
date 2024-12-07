@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/nav_prev"
+        android:enabled="true"
+        android:icon="@drawable/prev_icon"
+        android:title="Previous Page"/>
+    <item
+        android:id="@+id/nav_next"
+        android:enabled="true"
+        android:icon="@drawable/next_icon"
+        android:title="Next Page"/>
+</menu>
