@@ -14,8 +14,9 @@ import com.example.youmatter.data.model.testDepresi.Questions
 import com.example.youmatter.data.model.testDepresi.Request.AnswerOption
 import com.google.android.material.button.MaterialButton
 import android.content.Context;
+import kotlin.reflect.full.memberProperties
 
-class  TestAdapter(private val questionList: ArrayList<Questions>?, private val listener : OnButtonClickListener, private val mContext: Context): RecyclerView.Adapter<TestAdapter.TestViewHolder>() {
+class  TestAdapter(private val questionList: ArrayList<Questions>?, private val listener : OnButtonClickListener, private val mContext: Context, private val answerList: ArrayList<Any>): RecyclerView.Adapter<TestAdapter.TestViewHolder>() {
 
     interface OnButtonClickListener {
         fun onButtonClicked(position: Int, answerOption: AnswerOption)
@@ -47,6 +48,19 @@ class  TestAdapter(private val questionList: ArrayList<Questions>?, private val 
         holder.option2Button.text = question?.options?.get(1)?.option
         holder.option3Button.text = question?.options?.get(2)?.option
         holder.option4Button.text = question?.options?.get(3)?.option
+
+        if (!answerList.isEmpty){
+            if (getPropertyByKey(answerList[position], "id") == "1")
+            {
+                holder.option1Button.strokeColor = ContextCompat.getColorStateList(mContext, R.color.button_outline_color_for_option)
+            }else if (getPropertyByKey(answerList[position], "id") == "2"){
+                holder.option2Button.strokeColor = ContextCompat.getColorStateList(mContext, R.color.button_outline_color_for_option)
+            }else if (getPropertyByKey(answerList[position], "id") == "3"){
+                holder.option3Button.strokeColor = ContextCompat.getColorStateList(mContext, R.color.button_outline_color_for_option)
+            }else if (getPropertyByKey(answerList[position], "id") == "4"){
+                holder.option4Button.strokeColor = ContextCompat.getColorStateList(mContext, R.color.button_outline_color_for_option)
+            }
+        }
 
         holder.option1Button.setOnClickListener{
             listener.onButtonClicked(position, AnswerOption(question?.options?.get(0)?.id,question?.options?.get(0)?.option))
@@ -80,4 +94,11 @@ class  TestAdapter(private val questionList: ArrayList<Questions>?, private val 
     }
 
     override fun getItemCount(): Int = questionList?.size!!
+
+    // Function to get a property by key
+    fun getPropertyByKey(obj: Any, key: String): Any? {
+        // Use reflection to find the property
+        val property = obj::class.memberProperties.find { it.name == key }
+        return property?.getter?.call(obj) // Get the value of the property
+    }
 }

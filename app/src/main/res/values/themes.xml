@@ -4,5 +4,6 @@
     <style name="Theme.YouMatter" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <item name="fontFamily">@font/spacegrotesk</item>
         <item name="android:textColor">@color/text_color</item>
+
     </style>
 </resources>

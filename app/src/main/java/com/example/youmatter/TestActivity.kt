@@ -1,6 +1,7 @@
 package com.example.youmatter
 
 import android.R.integer
+import android.content.res.ColorStateList
 import android.os.Bundle
 import android.util.Log
 import android.widget.TextView
@@ -17,6 +18,11 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import kotlin.collections.arrayListOf
+import android.graphics.Color
+import androidx.core.content.ContextCompat
+import android.os.Handler
+import android.os.Looper
 
 class TestActivity : AppCompatActivity(), TestAdapter.OnButtonClickListener {
 
@@ -24,6 +30,11 @@ class TestActivity : AppCompatActivity(), TestAdapter.OnButtonClickListener {
     lateinit var recycleView: RecyclerView
     lateinit var sectionNameTextView: TextView
     lateinit var testNameTextView: TextView
+    lateinit var bottomNavigationView: BottomNavigationView
+    var socialAnswerList: ArrayList<Any> = arrayListOf()
+    var workingWorldAnswerList: ArrayList<Any>  = arrayListOf()
+    var studyingAnswerList: ArrayList<Any> = arrayListOf()
+
     var currentPage  = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -41,27 +52,41 @@ class TestActivity : AppCompatActivity(), TestAdapter.OnButtonClickListener {
 
         sectionNameTextView.text = "Social Settings"
         getTestData()
+        bottomNavigationView = findViewById<BottomNavigationView>(R.id.bottom_navigation)
 
-        val bottomNavigationView = findViewById<BottomNavigationView>(R.id.bottom_navigation)
+        val colorStateList = ColorStateList(
+            arrayOf(
+                intArrayOf(android.R.attr.state_pressed), // Pressed
+                intArrayOf(-android.R.attr.state_pressed) // Default
+            ),
+            intArrayOf(
+                ContextCompat.getColor(this, R.color.button_outline_color_for_option), // Color when pressed
+                ContextCompat.getColor(this, R.color.card_border_color) // Default color
+            )
+        )
 
-        bottomNavigationView.setOnNavigationItemSelectedListener{ item ->
+        // Apply the ColorStateList to the item text and icon
+        bottomNavigationView.itemIconTintList = colorStateList
+        bottomNavigationView.itemTextColor = colorStateList
+
+
+        bottomNavigationView.setOnItemSelectedListener { item ->
         when (item.itemId) {
             R.id.nav_next -> {
                 Log.d("Pressed", "NextButton")
                 changePage(1)
-                true
+                false
             }
 
             R.id.nav_prev -> {
                 Log.d("pressed", "PrevButton")
                 changePage(0)
-                true
+                false
             }
 
             else -> false
         }
         }
-
     }
 
 
@@ -76,8 +101,30 @@ class TestActivity : AppCompatActivity(), TestAdapter.OnButtonClickListener {
             ) {
 
                 if (response.body()?.success == true) {
+
+
+
                     TestData = response.body()?.data!!
-                    var testAdapter = TestAdapter(TestData.social.questions,this@TestActivity, applicationContext)
+
+                    TestData.social.questions?.let {
+                        while (socialAnswerList.size < it.size){
+                            socialAnswerList.add("")
+                        }
+                    }
+                    TestData.workingworld.questions?.let {
+                        while (workingWorldAnswerList.size < it.size){
+                            workingWorldAnswerList.add("")
+                        }
+                    }
+                    TestData.studying.questions?.let {
+                        while (studyingAnswerList.size < it.size){
+                            studyingAnswerList.add("")
+                        }
+                    }
+
+                    currentPage = 1
+
+                    var testAdapter = TestAdapter(TestData.social.questions,this@TestActivity, applicationContext, socialAnswerList)
 
                     var layoutManager: LinearLayoutManager = LinearLayoutManager(applicationContext,
                         LinearLayoutManager.VERTICAL, false)
@@ -85,7 +132,7 @@ class TestActivity : AppCompatActivity(), TestAdapter.OnButtonClickListener {
                     recycleView.layoutManager = layoutManager
                     recycleView.adapter = testAdapter
 
-                    currentPage = 1
+
                 }
             }
             override fun onFailure(
@@ -98,25 +145,28 @@ class TestActivity : AppCompatActivity(), TestAdapter.OnButtonClickListener {
     }
 
     private fun changePage(buttonPressed: Int){
-        if (currentPage == 1 && buttonPressed == 1){
-            var testAdapter = TestAdapter(TestData.workingworld.questions,this@TestActivity, applicationContext)
+        if (currentPage == 1 && buttonPressed == 1 && checkIfAllAnswered()){
+            var testAdapter = TestAdapter(TestData.workingworld.questions,this@TestActivity, applicationContext, workingWorldAnswerList)
             recycleView.adapter = testAdapter
             currentPage = 2
             sectionNameTextView.text = "WorkingWorld Settings"
         }
-        else if (currentPage == 2 && buttonPressed == 1){
-            var testAdapter = TestAdapter(TestData.studying.questions,this@TestActivity, applicationContext)
+        else if (currentPage == 2 && buttonPressed == 1 && checkIfAllAnswered()){
+            var testAdapter = TestAdapter(TestData.studying.questions,this@TestActivity, applicationContext, studyingAnswerList)
             recycleView.adapter = testAdapter
             currentPage = 3
             sectionNameTextView.text = "School Settings"
+            bottomNavigationView.menu.getItem(1).setTitle("Submit")
 
-        }else if (currentPage == 3 && buttonPressed == 0){
-            var testAdapter = TestAdapter(TestData.workingworld.questions,this@TestActivity, applicationContext)
+        }else if (currentPage == 3 && buttonPressed == 0 ){
+            var testAdapter = TestAdapter(TestData.workingworld.questions,this@TestActivity, applicationContext, workingWorldAnswerList)
             recycleView.adapter = testAdapter
             currentPage = 2
             sectionNameTextView.text = "WorkingWorld Settings"
-        }else if (currentPage == 2 && buttonPressed == 0){
-            var testAdapter = TestAdapter(TestData.social.questions,this@TestActivity, applicationContext)
+            bottomNavigationView.menu.getItem(1).setTitle("Next Page")
+
+        }else if (currentPage == 2 && buttonPressed == 0 ){
+            var testAdapter = TestAdapter(TestData.social.questions,this@TestActivity, applicationContext, socialAnswerList)
             recycleView.adapter = testAdapter
             currentPage = 1
             sectionNameTextView.text = "Social Settings"
@@ -129,6 +179,40 @@ class TestActivity : AppCompatActivity(), TestAdapter.OnButtonClickListener {
         answerOption: AnswerOption
     ) {
         Log.d("option changed", position.toString())
+        if (currentPage == 1){
+            socialAnswerList[position] = answerOption
+            Log.d("social", socialAnswerList.toString())
+        }else if  (currentPage == 2){
+            workingWorldAnswerList[position] = answerOption
+            Log.d("workingWorld", workingWorldAnswerList.toString())
+        }else{
+            studyingAnswerList[position] = answerOption
+            Log.d("studying", studyingAnswerList.toString())
+        }
+    }
+
+    fun checkIfAllAnswered(): Boolean {
+        if (currentPage == 1){
+            for (item in socialAnswerList){
+                if (item == ""){
+                    return false
+                }
+            }
+        }else if  (currentPage == 2){
+            for (item in workingWorldAnswerList){
+                if (item == ""){
+                    return false
+                }
+            }
+        }else{
+            for (item in studyingAnswerList){
+                if (item == ""){
+                    return false
+                }
+            }
+        }
+        return true
+
     }
 
     val dataDummy = Data("",

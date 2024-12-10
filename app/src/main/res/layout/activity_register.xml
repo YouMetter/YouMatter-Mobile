@@ -5,8 +5,7 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".LoginActivity">
-
+    tools:context=".RegisterActivity">
 
     <ImageView
         android:id="@+id/imageView"
@@ -20,7 +19,6 @@
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent" />
 
-
     <androidx.cardview.widget.CardView
         android:id="@+id/cardView"
         android:layout_width="match_parent"
@@ -32,32 +30,34 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:padding="20dp"
-            android:orientation="vertical">
-            <com.google.android.material.textview.MaterialTextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/sign_in_label"
-                android:gravity="center"
-                android:textSize="20dp"
-                android:layout_marginBottom="20dp"
+            android:orientation="vertical"
+            android:padding="20dp">
 
-                />
-            <com.google.android.material.textfield.TextInputLayout
-                style="?attr/textInputOutlinedStyle"
-                android:id="@+id/loginusername"
+            <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="20dp"
-                android:hint="Username"
-                app:placeholderText="username"
-                app:endIconMode="clear_text">
+                android:gravity="center"
+                android:text="Sign Up"
+                android:textSize="20dp"
+                android:textStyle="bold" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/RegisterNama"
+                style="?attr/textInputOutlinedStyle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="20dp"
+                android:hint="Name"
+                app:endIconMode="clear_text"
+                app:placeholderText="John Doe">
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/loginInputUsername"
+                    android:id="@+id/RegisterInputNama"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:inputType="text" />
@@ -65,17 +65,54 @@
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/RegisterUsername"
                 style="?attr/textInputOutlinedStyle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="20dp"
+                android:hint="Username"
+                app:endIconMode="clear_text"
+                app:placeholderText="username">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/RegisterInputUsername"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="text" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/RegisterEmail"
+                style="?attr/textInputOutlinedStyle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="20dp"
+                android:hint="Email"
+                app:endIconMode="clear_text"
+                app:placeholderText="youremail@gmail.com">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/RegisterInputEmail"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="text" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/loginpass"
+                style="?attr/textInputOutlinedStyle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="20dp"
                 android:hint="Password"
-                app:placeholderText="*******"
-                app:endIconMode="password_toggle">
+                app:endIconMode="password_toggle"
+                app:placeholderText="*******">
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/loginInputPass"
+                    android:id="@+id/RegisterInputPass"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:inputType="textPassword" />
@@ -83,22 +120,23 @@
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.button.MaterialButton
-                android:id="@+id/LoginButton"
+                android:id="@+id/ButtonSubmit"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="LOGIN"
-                android:layout_gravity="center" />
+                android:layout_gravity="center"
+                android:text="REGISTER" />
         </LinearLayout>
 
     </androidx.cardview.widget.CardView>
 
     <TextView
-        android:id="@+id/RegisterText"
+        android:id="@+id/textLogin"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         android:textStyle="bold"
-        android:text="Doesn’t have account? Sign Up"
+        android:text="Already have account? Sign in"
         app:layout_constraintTop_toBottomOf="@+id/cardView"
         android:textAlignment="center" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

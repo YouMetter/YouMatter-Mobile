@@ -1,29 +1,159 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/onboardingView"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    android:layout_height="match_parent">
 
     <ImageView
-        android:id="@+id/imageView"
+        android:id="@+id/imageView4"
+        android:layout_width="38dp"
+        android:layout_height="38dp"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="60dp"
+        android:src="@drawable/logo"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/materialButton"
+        android:layout_width="wrap_content"
+        android:layout_height="38dp"
+        android:layout_marginTop="60dp"
+        android:layout_marginEnd="30dp"
+        android:text="Skip"
+        android:textAllCaps="false"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/onboardingImage"
         android:layout_width="200dp"
         android:layout_height="200dp"
-        android:layout_marginTop="32dp"
-        android:src="@drawable/ic_launcher_foreground"
-        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="216dp"
+        android:src="@drawable/onboarding_image_1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/textView"
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="30dp"
+        android:layout_marginTop="100dp"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/onboardingImage">
+
+        <TextView
+            android:id="@+id/oboardingTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Your Mental Health, Your Priority."
+            android:textSize="20sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/oboardingDescription"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Discover a safe space to care for your mental well-being. Chat with professional psychologists, take mental health tests, and explore communities that understand you. Start your journey to a healthier, happier mind."
+            android:textSize="12sp" />
+    </LinearLayout>
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/nextButton"
+        android:layout_width="wrap_content"
+        android:layout_height="38dp"
+        android:layout_marginTop="60dp"
+        android:layout_marginEnd="30dp"
+        android:backgroundTint="@color/black"
+        android:text="Next"
+        android:textAllCaps="false"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
+
+    <LinearLayout
+        android:id="@+id/onboarding_progress1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:text="Onboarding Page"
-        android:textSize="18sp"
-        app:layout_constraintTop_toBottomOf="@id/imageView"
+        android:orientation="horizontal"
+        android:layout_marginTop="75dp"
+        android:layout_marginStart="30dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
-
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout">
+        <androidx.cardview.widget.CardView
+            android:layout_width="20dp"
+            android:layout_height="9dp"
+            android:backgroundTint="@color/purple_500"
+            app:cardCornerRadius="10dp" />
+        <androidx.cardview.widget.CardView
+            android:layout_width="9dp"
+            android:layout_height="9dp"
+            android:backgroundTint="@color/black"
+            app:cardCornerRadius="20dp" />
+        <androidx.cardview.widget.CardView
+            android:layout_width="9dp"
+            android:layout_height="9dp"
+            android:backgroundTint="@color/black"
+            app:cardCornerRadius="20dp" />
+    </LinearLayout>
+    <LinearLayout
+        android:id="@+id/onboarding_progress2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="75dp"
+        android:layout_marginStart="30dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout">
+        <androidx.cardview.widget.CardView
+            android:layout_width="9dp"
+            android:layout_height="9dp"
+            android:backgroundTint="@color/black"
+            app:cardCornerRadius="20dp" />
+        <androidx.cardview.widget.CardView
+            android:layout_width="20dp"
+            android:layout_height="9dp"
+            android:backgroundTint="@color/purple_500"
+            app:cardCornerRadius="10dp" />
+        <androidx.cardview.widget.CardView
+            android:layout_width="9dp"
+            android:layout_height="9dp"
+            android:backgroundTint="@color/black"
+            app:cardCornerRadius="20dp" />
+    </LinearLayout>
+    <LinearLayout
+        android:id="@+id/onboarding_progress3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="75dp"
+        android:layout_marginStart="30dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout">
+        <androidx.cardview.widget.CardView
+            android:layout_width="9dp"
+            android:layout_height="9dp"
+            android:backgroundTint="@color/black"
+            app:cardCornerRadius="20dp" />
+        <androidx.cardview.widget.CardView
+            android:layout_width="9dp"
+            android:layout_height="9dp"
+            android:backgroundTint="@color/black"
+            app:cardCornerRadius="20dp" />
+        <androidx.cardview.widget.CardView
+            android:layout_width="20dp"
+            android:layout_height="9dp"
+            android:backgroundTint="@color/purple_500"
+            app:cardCornerRadius="10dp" />
+    </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
